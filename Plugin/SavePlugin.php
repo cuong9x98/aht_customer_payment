@@ -23,13 +23,12 @@ class SavePlugin {
     $this->_groupRepository = $groupRepository;
     $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
     $this->_groupFactory = $groupFactory;
-  }       
+  }
 
   public function afterexecute(\Magento\Customer\Controller\Adminhtml\Group\Save $save, $result)
-  {   
+  {
     $active = $save->getRequest()->getParam('customer_payment');
-    
-    $code = $save->getRequest()->getParam('code'); 
+    $code = $save->getRequest()->getParam('code');
     if(empty($code))
       $code = 'NOT LOGGED IN';
     $_filter = [ $this->_filterBuilder->setField('customer_group_code')->setConditionType('eq')->setValue($code)->create() ];
@@ -43,5 +42,5 @@ class SavePlugin {
      $group->save();
     }
     return $result;
-  }       
+  }
 }
